@@ -126,7 +126,10 @@ const BuyCredit = () => {
           )}
                 
               </div>
-                  <button onClick={() => { paymentRazorPay(item.id) }} className='bg-zinc-900 text-white  px-4 py-2 2xl:px-10 2xl:py-4 text-sm rounded-md'>
+                  <button onClick={() => { 
+                    alert('razorpay on test mode.......your payment will not count...')
+                    // paymentRazorPay(item.id)
+                   }} className='bg-zinc-900 text-white  px-4 py-2 2xl:px-10 2xl:py-4 text-sm rounded-md'>
                     {
                       user ? "Purchase" : "Get Started"
                     }
