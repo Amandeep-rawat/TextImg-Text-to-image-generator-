@@ -39,7 +39,7 @@ const ShortVidGen = () => {
   };
 
   const handleConvert = async () => {
-    const response = await fetch('http://localhost:3000/api/aivideo/text-to-speech', {
+    const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/aivideo/text-to-speech`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
