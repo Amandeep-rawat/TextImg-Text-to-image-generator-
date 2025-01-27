@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const apiKey = 'sk_55dfa4788fba9f36b3f4d16cf6eca97cca4773cf2ae0ff2e';
+const apiKey = process.env.ELEVENLABS_API_KEY ;
 const client = new ElevenLabsClient({ apiKey });
 
 // Get the current directory path in ES module
