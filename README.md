@@ -3,7 +3,6 @@
 🚀 **TextImg** is an advanced AI-powered platform that lets you generate stunning images from text and remove backgrounds with ease.  
 
 🔗 **Live Demo:** [TextImg - Stunning Visual Generator](https://textimg-stunning-visual-generator.onrender.com/)  
-
 ## ✨ Features  
 - 🖼 **AI Text-to-Image Generator** - Turn your words into breathtaking visuals with AI.  
 - 🧹 **Background Remover** - Effortlessly remove backgrounds from images.  
