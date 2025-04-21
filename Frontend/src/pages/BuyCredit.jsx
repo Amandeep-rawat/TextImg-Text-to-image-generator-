@@ -127,7 +127,7 @@ const BuyCredit = () => {
                 
               </div>
                   <button onClick={() => { 
-                    alert('teri maa ki chuut lode...')
+                    alert('coming soon...')
                     // paymentRazorPay(item.id)
                    }} className='bg-zinc-900 text-white  px-4 py-2 2xl:px-10 2xl:py-4 text-sm rounded-md'>
                     {
