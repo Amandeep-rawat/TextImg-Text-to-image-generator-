@@ -35,6 +35,7 @@ const Navbar = () => {
   <DropdownMenuContent className="bg-gradient-to-bl from-[#726a6f] to-[#3b32b1] text-white">
     <DropdownMenuLabel>Features Added</DropdownMenuLabel>
     <DropdownMenuSeparator />
+    <DropdownMenuItem className="py-2" onClick={()=>{navigate('/')}}>Text to Image</DropdownMenuItem>
     <DropdownMenuItem className="py-2" onClick={()=>{navigate('/bgremoval')}}>Background Remover</DropdownMenuItem>
     <DropdownMenuItem className="py-2" onClick={()=>{navigate('/short-vid-gen')}}>Text to Video Generator</DropdownMenuItem>
    

@@ -17,7 +17,7 @@ const BackgroundRemover = () => {
 
   const navigate=useNavigate();
   const {token,loadCreditData}=useContext(AppContext)
-
+// const navigate = useNavigat();
   const ref = React.useRef(null);
 
   const handleFileChange = (event) => {

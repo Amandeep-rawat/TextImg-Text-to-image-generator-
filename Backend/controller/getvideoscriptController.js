@@ -1,32 +1,48 @@
-import { chatSession } from "../config/aiModel.js";
+// middleware/getVideo.js
 
-export const GetVideoScript=async(req,res)=>{
-    
-    try {
-        const {prompt}=await req.body;
+// import dotenv from "dotenv";
+import User from "../models/userModel.js";
+import { createClient } from "pexels";
 
-        // console.log(prompt)
-        const result=await chatSession.sendMessage(prompt);
-        // console.log(result.response.text());
-        const responseText = result.response.text();
+export const getVideo = async (req, res) => {
+  try {
+    const client = createClient(process.env.PEXELS_API_KEY);
 
-        // Try to parse the response as JSON
-    let jsonResponse;
-    try {
-      jsonResponse = JSON.parse(responseText);
-    } catch (parseError) {
-      console.error("Failed to parse AI response as JSON:", parseError.message);
-      return res.status(500).json({ error: "Invalid response format from AI model." });
+     const userId = req.id;
+    const query = req.query.q || "nature";
+
+    // Validate inputs
+    if (!userId || !query) {
+      return res.status(400).json({ message: "Missing userId or query", success: false });
     }
 
-    // console.log("AI JSON Response:", jsonResponse);
-
-    // Return the parsed JSON response
-    return res.json({ result: jsonResponse });
-        
-    } catch (error)
-    {
-        return res.json({'Error':error.message})
-        
+    // Check if user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found", success: false });
     }
-}
+
+    // Check user's credit balance
+    if (user.creditBalance <= 0) {
+      return res.status(400).json({ message: "You have no credits left", creditBalance: user.creditBalance, success: false });
+    }
+
+    // Fetch video from Pexels API
+    const result = await client.videos.search({ query, per_page: 2 });
+
+    // Deduct 1 credit and save
+    user.creditBalance -= 1;
+    await user.save();
+
+    return res.status(200).json({
+      message: "Video fetched successfully",
+      success: true,
+      videos: result.videos,
+      creditBalance: user.creditBalance,
+    });
+
+  } catch (error) {
+    console.error("Video generation error:", error.message);
+    res.status(500).json({ message: "Failed to fetch videos", success: false });
+  }
+};

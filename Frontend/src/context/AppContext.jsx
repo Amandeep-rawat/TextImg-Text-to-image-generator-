@@ -11,7 +11,7 @@ const AppContextProvider = (props) => {
     const [token, setToken] = useState(localStorage.getItem('token'));
     const [credit, setCredit] = useState(null);  // Use null for better state management
     const backendUrl = import.meta.env.BACKEND_URL;
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
     // Effect hook to load credit data when token is available or changed
     useEffect(() => {
@@ -61,7 +61,7 @@ const AppContextProvider = (props) => {
     // Logout function to remove token from localStorage and reset the state
     const logout = async () => {
         try {
-            
+
             localStorage.removeItem('token');
             setToken(null);  // Use null instead of empty string for better state management
             setUser(null);
@@ -73,40 +73,40 @@ const AppContextProvider = (props) => {
         }
     };
 
-    const generateImage=async(prompt)=>{
-    // console.log("prompt is ",prompt)
-    try {
-        const res=await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/image/generate`,{
-            method:"POST",
-            headers:{
-                "Content-Type":"application/json",
-                "token":token,
-            },
-            body:JSON.stringify({prompt})
-        })
-        if(!res.ok){
-            const errordata=await res.json();
-            toast.error(errordata.message);
-            loadCreditData();
-            if(errordata.creditBalance<=0){
-                navigate('/buycredit');
+    const generateImage = async (prompt) => {
+        // console.log("prompt is ",prompt)
+        try {
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/image/generate`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "token": token,
+                },
+                body: JSON.stringify({ prompt })
+            })
+            if (!res.ok) {
+                const errordata = await res.json();
+                toast.error(errordata.message);
+                loadCreditData();
+                if (errordata.creditBalance <= 0) {
+                    navigate('/buycredit');
+                }
+
+            }
+            else {
+
+
+                const data = await res.json();
+                toast.success("Image generated successfully");
+
+                loadCreditData();
+                return { image: data.resultImage, success: data.success };
             }
 
+        } catch (error) {
+            toast.error("An error occurred while generating image");
+            console.log(error);
         }
-        else{
-
-            
-            const data=await res.json();
-            toast.success("Image generated successfully");
-            
-            loadCreditData();
-            return {image:data.resultImage,success:data.success};
-        }
-
-    } catch (error) {
-        toast.error("An error occurred while generating image");
-        console.log(error);
-    }
     }
 
     const value = {
@@ -124,7 +124,7 @@ const AppContextProvider = (props) => {
         loadCreditData,
         logout,
         generateImage
-        
+
     };
 
     return (

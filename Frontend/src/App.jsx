@@ -20,31 +20,31 @@ import ShortVidGen from './pages/ShortVidGen';
 const App = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
-  const {showLogin,setShowLogin}=useContext(AppContext);
+  const { showLogin, setShowLogin } = useContext(AppContext);
   return (
 
     <div className='px-4  sm:px-6 md:px-6 lg:px-8 relative  '>
-      
-     <ToastContainer position='bottom-right'/>
-     {!isHomePage && <Navbar />}
-     {
-      showLogin &&
-       <Login/>
-     }
-    <Routes>
 
-    <Route path="/" element={<Home />} />
+      <ToastContainer position='bottom-right' />
+      {!isHomePage && <Navbar />}
+      {
+        showLogin &&
+        <Login />
+      }
+      <Routes>
+
+        <Route path="/" element={<Home />} />
         <Route path="/result" element={<ProtectedRoute element={<Result />} />} />
-        <Route path="/buycredit" element={<BuyCredit />} /> 
-        <Route path="/bgremoval" element={<ProtectedRoute element={<BackgroundRemover />} />} />  
-        <Route path="/short-vid-gen" element={<ProtectedRoute element={<ShortVidGen/>} />} />  
-        
-      
-    </Routes>
-    <Footer/>
+        <Route path="/buycredit" element={<BuyCredit />} />
+        <Route path="/bgremoval" element={<ProtectedRoute element={<BackgroundRemover />} />} />
+        <Route path="/short-vid-gen" element={<ProtectedRoute element={<ShortVidGen />} />} />
+
+
+      </Routes>
+      <Footer />
 
     </div>
-    
+
   );
 }
 
