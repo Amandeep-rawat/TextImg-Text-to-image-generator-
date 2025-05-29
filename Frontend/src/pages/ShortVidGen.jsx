@@ -570,7 +570,7 @@ function ShortVidGen() {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-            className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-white via-purple-500 to-pink-200 bg-clip-text text-transparent leading-tight"
+            className="text-6xl md:text-7xl max-sm:text-4xl font-bold bg-gradient-to-r from-white via-purple-500 to-pink-200 bg-clip-text text-transparent leading-tight"
           >
             Create Videos from
             <span className="block bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
